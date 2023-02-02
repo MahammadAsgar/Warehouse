@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
-using Warehouse.Business.Dtos.Get;
-using Warehouse.Business.Dtos.Post;
+using Warehouse.Business.Dtos.Get.Main;
+using Warehouse.Business.Dtos.Post.Main;
 using Warehouse.DataAccess.Entities.Main;
+using Warehouse.DataAccess.Models;
 
 namespace Warehouse.Business.Mappings
 {
@@ -13,6 +14,7 @@ namespace Warehouse.Business.Mappings
             CreateMap<Product, GetProductDto>().ReverseMap();
             CreateMap<Product, GetProductNameDto>().ReverseMap();
             CreateMap<ProductFile, GetProductFileDto>().ReverseMap();
+            CreateMap<ProductSeachModel, ProductSearchModelDto>().ReverseMap();
 
             CreateMap<Category, AddCategoryDto>().ReverseMap();
             CreateMap<Category, GetCategoryDto>().ReverseMap();

@@ -22,6 +22,6 @@ namespace Warehouse.DataAccess.Entities.Main
         public int MeatureTypeId { get; set; }
         public MeatureType MeatureType { get; set; }
         public double UnitOfMeasure { get; set; }
-        public IEnumerable<ProductFile> ProductFiles { get; set; }
+        public ICollection<ProductFile> ProductFiles { get; set; }
     }
 }

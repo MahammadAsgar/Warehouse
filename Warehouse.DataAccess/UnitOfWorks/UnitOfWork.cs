@@ -18,7 +18,7 @@ namespace Warehouse.DataAccess.UnitOfWorks
         {
             _warehouseDbContext = warehouseDbContext;
             _repositories = new Dictionary<Type, object>();
-            _session = httpContextAccessor.HttpContext?.Session;
+           // _session = httpContextAccessor.HttpContext?.Session;
         }
 
         public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : EntityBase

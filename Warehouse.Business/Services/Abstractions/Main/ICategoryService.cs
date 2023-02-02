@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Warehouse.Business.Dtos.Post;
+using Warehouse.Business.Dtos.Post.Main;
 using Warehouse.Business.Results;
 
-namespace Warehouse.Business.Services.Abstractions
+namespace Warehouse.Business.Services.Abstractions.Main
 {
     public interface ICategoryService
     {
@@ -14,6 +14,7 @@ namespace Warehouse.Business.Services.Abstractions
         Task<ServiceResult> UpdateCategory(AddCategoryDto category, int id);
         Task<ServiceResult> DeleteCategory(int id);
         Task<ServiceResult> GetCategory(int id);
-        Task<ServiceResult> GetCategories();
+        Task<ServiceResult> GetAllCategories();
+        Task<ServiceResult> GetActiveCategories();
     }
 }

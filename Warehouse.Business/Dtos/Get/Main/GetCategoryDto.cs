@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Warehouse.Business.Dtos.Get
+namespace Warehouse.Business.Dtos.Get.Main
 {
     public class GetCategoryDto
     {

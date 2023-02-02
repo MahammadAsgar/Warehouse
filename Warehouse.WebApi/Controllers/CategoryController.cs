@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using Warehouse.Business.Dtos.Post;
+using Warehouse.Business.Dtos.Post.Main;
 using Warehouse.Business.Results;
-using Warehouse.Business.Services.Abstractions;
+using Warehouse.Business.Services.Abstractions.Main;
 
 namespace Warehouse.WebApi.Controllers
 {
@@ -14,7 +14,7 @@ namespace Warehouse.WebApi.Controllers
         private readonly ICategoryService _categoryService;
         public CategoryController(ICategoryService categoryService)
         {
-            _categoryService = categoryService; 
+            _categoryService = categoryService;
         }
 
         [HttpPost]
@@ -24,18 +24,39 @@ namespace Warehouse.WebApi.Controllers
             return Ok(await _categoryService.AddCategory(category));
         }
 
-         [HttpGet]
+        [HttpPut]
+        [ProducesResponseType(typeof(ServiceResult), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<ServiceResult>> UpdateCategory([FromForm] AddCategoryDto category, int id)
+        {
+            return Ok(await _categoryService.UpdateCategory(category, id));
+        }
+
+        [HttpPut]
+        [ProducesResponseType(typeof(ServiceResult), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<ServiceResult>> DeleteCategory(int id)
+        {
+            return Ok(await _categoryService.DeleteCategory(id));
+        }
+
+        [HttpGet]
         [ProducesResponseType(typeof(ServiceResult), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ServiceResult>> GetCategory(int id)
         {
             return Ok(await _categoryService.GetCategory(id));
         }
-         [HttpPost]
+
+        [HttpGet]
         [ProducesResponseType(typeof(ServiceResult), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<ServiceResult>> GetCategories()
+        public async Task<ActionResult<ServiceResult>> GetAllCategories()
         {
-            return Ok(await _categoryService.GetCategories());
+            return Ok(await _categoryService.GetAllCategories());
         }
 
+        [HttpGet]
+        [ProducesResponseType(typeof(ServiceResult), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<ServiceResult>> GetActiveCategories()
+        {
+            return Ok(await _categoryService.GetActiveCategories());
+        }
     }
 }

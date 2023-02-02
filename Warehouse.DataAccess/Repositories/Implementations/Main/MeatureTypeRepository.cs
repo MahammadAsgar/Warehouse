@@ -23,10 +23,18 @@ namespace Warehouse.DataAccess.Repositories.Implementations.Main
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<IEnumerable<MeatureType>> GetMeatureTypes()
+        public async Task<IEnumerable<MeatureType>> GetAllMeatureTypes()
         {
             return await GetAsQueryable()
                 .Include(x => x.Products)
+                .ToListAsync();
+        } 
+        
+        public async Task<IEnumerable<MeatureType>> GetActiveMeatureTypes()
+        {
+            return await GetAsQueryable()
+                .Include(x => x.Products)
+                .Where(x=>x.IsActive==true)
                 .ToListAsync();
         }
     }

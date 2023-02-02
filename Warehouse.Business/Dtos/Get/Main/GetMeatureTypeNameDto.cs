@@ -1,4 +1,4 @@
-﻿namespace Warehouse.Business.Dtos.Get
+﻿namespace Warehouse.Business.Dtos.Get.Main
 {
     public class GetMeatureTypeNameDto
     {
