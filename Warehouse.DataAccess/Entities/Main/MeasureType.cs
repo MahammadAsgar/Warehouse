@@ -2,7 +2,7 @@
 
 namespace Warehouse.DataAccess.Entities.Main
 {
-    public class MeatureType:EntityBase
+    public class MeasureType:EntityBase
     {
         public string Name { get; set; }
         public string Description { get; set; }

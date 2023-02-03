@@ -4,10 +4,10 @@ using Warehouse.DataAccess.Entities.Main;
 
 namespace Warehouse.DataAccess.Repositories.Abstractions.Main
 {
-    public interface IMeatureTypeRepository:IGenericRepository<MeatureType>
+    public interface IMeatureTypeRepository:IGenericRepository<MeasureType>
     {
-        Task<MeatureType> GetMeatureType(int id);
-        Task<IEnumerable<MeatureType>> GetAllMeatureTypes();
-        Task<IEnumerable<MeatureType>> GetActiveMeatureTypes();
+        Task<MeasureType> GetMeatureType(int id);
+        Task<IEnumerable<MeasureType>> GetAllMeatureTypes();
+        Task<IEnumerable<MeasureType>> GetActiveMeatureTypes();
     }
 }

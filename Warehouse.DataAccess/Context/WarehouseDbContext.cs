@@ -13,7 +13,11 @@ namespace Warehouse.DataAccess.Context
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<MeatureType> MeatureTypes { get; set; }
+        public DbSet<MeasureType> MeatureTypes { get; set; }
         public DbSet<Warehouse.DataAccess.Entities.Main.File> Files { get; set; }
+        public DbSet<Stock> Stocks { get; set; }
+        public DbSet<Selling> Sellings { get; set; }
+        public DbSet<Buying> Buyings { get; set; }
+        public DbSet<Warehouse.DataAccess.Entities.Main.Depot> Warehouses { get; set; }
     }
 }

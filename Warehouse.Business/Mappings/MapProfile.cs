@@ -20,9 +20,19 @@ namespace Warehouse.Business.Mappings
             CreateMap<Category, GetCategoryDto>().ReverseMap();
             CreateMap<Category, GetCategoryNameDto>().ReverseMap();
 
-            CreateMap<MeatureType, AddMeatureTypeDto>().ReverseMap();
-            CreateMap<MeatureType, GetMeatureTypeDto>().ReverseMap();
-            CreateMap<MeatureType, GetMeatureTypeNameDto>().ReverseMap();
+            CreateMap<MeasureType, AddMeasureTypeDto>().ReverseMap();
+            CreateMap<MeasureType, GetMeasureTypeDto>().ReverseMap();
+            CreateMap<MeasureType, GetMeasureTypeNameDto>().ReverseMap();
+
+
+            CreateMap<Selling, AddSellingDto>().ReverseMap();
+            CreateMap<Selling, GetSellingDto>().ReverseMap();
+
+            CreateMap<Buying, AddBuyingDto>().ReverseMap();
+            CreateMap<Buying, GetBuyingDto>().ReverseMap();
+
+            CreateMap<Depot, GetDepotDto>().ReverseMap();
+            CreateMap<Stock, GetStockDto>().ReverseMap();
         }
     }
 }

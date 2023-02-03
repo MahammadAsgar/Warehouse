@@ -13,8 +13,6 @@ namespace Warehouse.Business.Dtos.Post.Main
         public double? Volume { get; set; }
         public double? Weight { get; set; }
         public int? CategoryId { get; set; }
-        public int? MeatureTypeId { get; set; }
-        public double? UnitOfMeasure { get; set; }
         public IFormFileCollection Files { get; set; }
     }
 }

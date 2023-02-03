@@ -22,13 +22,13 @@ namespace Warehouse.Business.Services.Implementations.Main
             _meatureTypeRepository = meatureTypeRepository;
         }
 
-        public async Task<ServiceResult> AddMeatureType(AddMeatureTypeDto meatureType)
+        public async Task<ServiceResult> AddMeatureType(AddMeasureTypeDto meatureType)
         {
-            var request = _mapper.Map<MeatureType>(meatureType);
+            var request = _mapper.Map<MeasureType>(meatureType);
             request.IsActive = true;
-            await _unitOfWork.Repository<MeatureType>().AddAsync(request);
+            await _unitOfWork.Repository<MeasureType>().AddAsync(request);
             _unitOfWork.Commit();
-            var response = _mapper.Map<GetMeatureTypeDto>(request);
+            var response = _mapper.Map<GetMeasureTypeDto>(request);
             return new ServiceResult(true, response.Id);
         }
 
@@ -38,7 +38,7 @@ namespace Warehouse.Business.Services.Implementations.Main
             if (result != null)
             {
                 result.IsActive = false;
-                _unitOfWork.Repository<MeatureType>().Update(result);
+                _unitOfWork.Repository<MeasureType>().Update(result);
                 _unitOfWork.Commit();
                 return new ServiceResult(true);
             }
@@ -48,24 +48,24 @@ namespace Warehouse.Business.Services.Implementations.Main
         public async Task<ServiceResult> GetMeatureType(int id)
         {
             var request = await _meatureTypeRepository.GetMeatureType(id);
-            var response = _mapper.Map<GetMeatureTypeDto>(request);
+            var response = _mapper.Map<GetMeasureTypeDto>(request);
             return new ServiceResult(true, response);
         }
 
         public async Task<ServiceResult> GetAllMeatureTypes()
         {
             var request = await _meatureTypeRepository.GetAllMeatureTypes();
-            var response = _mapper.Map<List<GetMeatureTypeDto>>(request);
+            var response = _mapper.Map<List<GetMeasureTypeDto>>(request);
             return new ServiceResult(true, response);
         }
         public async Task<ServiceResult> GetActiveMeatureTypes()
         {
             var request = await _meatureTypeRepository.GetActiveMeatureTypes();
-            var response = _mapper.Map<List<GetMeatureTypeDto>>(request);
+            var response = _mapper.Map<List<GetMeasureTypeDto>>(request);
             return new ServiceResult(true, response);
         }
 
-        public async Task<ServiceResult> UpdateMeatureType(AddMeatureTypeDto meatureType, int id)
+        public async Task<ServiceResult> UpdateMeatureType(AddMeasureTypeDto meatureType, int id)
         {
             var result = await _meatureTypeRepository.GetMeatureType(id);
             if (result != null)
@@ -80,7 +80,7 @@ namespace Warehouse.Business.Services.Implementations.Main
                     result.Description = meatureType.Description;
                 }
 
-                _unitOfWork.Repository<MeatureType>().Update(result);
+                _unitOfWork.Repository<MeasureType>().Update(result);
                 _unitOfWork.Commit();
                 return new ServiceResult(true);
             }

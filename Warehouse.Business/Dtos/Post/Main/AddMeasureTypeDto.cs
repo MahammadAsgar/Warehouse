@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Warehouse.Business.Dtos.Post.Main
 {
-    public class AddMeatureTypeDto
+    public class AddMeasureTypeDto
     {
         public string Name { get; set; }
         public string Description { get; set; }

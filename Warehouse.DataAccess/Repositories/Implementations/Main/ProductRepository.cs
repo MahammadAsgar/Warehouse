@@ -20,7 +20,6 @@ namespace Warehouse.DataAccess.Repositories.Implementations.Main
             return await GetAsQueryable()
                  .Include(x => x.ProductFiles)
                  .Include(x => x.Category)
-                 .Include(x => x.MeatureType)
                  .FirstOrDefaultAsync(x => x.Id == id);
         }
 
@@ -29,7 +28,7 @@ namespace Warehouse.DataAccess.Repositories.Implementations.Main
             return await GetAsQueryable()
                 .Include(x => x.ProductFiles)
                 .Include(x => x.Category)
-                .Include(x => x.MeatureType)
+                .Include(x => x)
                 .ToListAsync();
         }
         public async Task<IEnumerable<Product>> GetAllProducts()
@@ -37,7 +36,6 @@ namespace Warehouse.DataAccess.Repositories.Implementations.Main
             return await GetAsQueryable()
                 .Include(x => x.ProductFiles)
                 .Include(x => x.Category)
-                .Include(x => x.MeatureType)
                 .ToListAsync();
         }
         public async Task<IEnumerable<Product>> GetActiveProducts()
@@ -45,7 +43,6 @@ namespace Warehouse.DataAccess.Repositories.Implementations.Main
             return await GetAsQueryable()
                 .Include(x => x.ProductFiles)
                 .Include(x => x.Category)
-                .Include(x => x.MeatureType)
                 .Where(x => x.IsActive == true)
                 .ToListAsync();
         }
@@ -55,7 +52,6 @@ namespace Warehouse.DataAccess.Repositories.Implementations.Main
             return await GetAsQueryable()
                 .Include(x => x.ProductFiles)
                 .Include(x => x.Category)
-                .Include(x => x.MeatureType)
                 .Where(x => x.CategoryId == categoryId && x.IsActive == true)
                 .ToListAsync();
         }
@@ -65,8 +61,6 @@ namespace Warehouse.DataAccess.Repositories.Implementations.Main
             return await GetAsQueryable()
                .Include(x => x.ProductFiles)
                .Include(x => x.Category)
-               .Include(x => x.MeatureType)
-               .Where(x => x.MeatureTypeId == meatureId && x.IsActive == true)
                .ToListAsync();
         }
 
@@ -74,7 +68,6 @@ namespace Warehouse.DataAccess.Repositories.Implementations.Main
         {
             var data = GetAsQueryable()
                          .Include(x => x.Category)
-                         .Include(x => x.MeatureType)
                          .Include(x => x.ProductFiles)
                          .Where(GeneratePredicate(searchModel))
                          .OrderBy(sortField);
@@ -101,7 +94,7 @@ namespace Warehouse.DataAccess.Repositories.Implementations.Main
 
             if (!string.IsNullOrEmpty(searchModel.MeatureTypeTitle))
             {
-                predicate = predicate.And(x => x.MeatureType.Name == searchModel.MeatureTypeTitle);
+              //  predicate = predicate.And(x => x.MeatureType.Name == searchModel.MeatureTypeTitle);
             }
 
             if (searchModel.Volume.HasValue)

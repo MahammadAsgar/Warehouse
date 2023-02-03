@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Warehouse.DataAccess.Context;
 
@@ -11,9 +12,10 @@ using Warehouse.DataAccess.Context;
 namespace Warehouse.DataAccess.Migrations
 {
     [DbContext(typeof(WarehouseDbContext))]
-    partial class WarehouseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230203081428_StockUpdatedMig")]
+    partial class StockUpdatedMig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -209,34 +211,6 @@ namespace Warehouse.DataAccess.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Depot", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime?>("EditDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("EditUserId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("RegDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("RegUserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Warehouses");
-                });
-
             modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.File", b =>
                 {
                     b.Property<int>("Id")
@@ -425,9 +399,6 @@ namespace Warehouse.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("DepotId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("EditDate")
                         .HasColumnType("datetime2");
 
@@ -452,15 +423,46 @@ namespace Warehouse.DataAccess.Migrations
                     b.Property<double?>("UnitOfMeasure")
                         .HasColumnType("float");
 
-                    b.HasKey("Id");
+                    b.Property<int?>("WarehouseId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("DepotId");
+                    b.HasKey("Id");
 
                     b.HasIndex("MeasureTypeId");
 
                     b.HasIndex("ProductId");
 
+                    b.HasIndex("WarehouseId");
+
                     b.ToTable("Stocks");
+                });
+
+            modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Warehouse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime?>("EditDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("EditUserId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("RegDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RegUserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Warehouses");
                 });
 
             modelBuilder.Entity("Warehouse.DataAccess.Entities.Users.ApplicationRole", b =>
@@ -687,10 +689,6 @@ namespace Warehouse.DataAccess.Migrations
 
             modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Stock", b =>
                 {
-                    b.HasOne("Warehouse.DataAccess.Entities.Main.Depot", null)
-                        .WithMany("Stocks")
-                        .HasForeignKey("DepotId");
-
                     b.HasOne("Warehouse.DataAccess.Entities.Main.MeasureType", "MeasureType")
                         .WithMany()
                         .HasForeignKey("MeasureTypeId")
@@ -702,6 +700,10 @@ namespace Warehouse.DataAccess.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Warehouse.DataAccess.Entities.Main.Warehouse", null)
+                        .WithMany("Stocks")
+                        .HasForeignKey("WarehouseId");
 
                     b.Navigation("MeasureType");
 
@@ -724,11 +726,6 @@ namespace Warehouse.DataAccess.Migrations
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Depot", b =>
-                {
-                    b.Navigation("Stocks");
-                });
-
             modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.MeasureType", b =>
                 {
                     b.Navigation("Products");
@@ -737,6 +734,11 @@ namespace Warehouse.DataAccess.Migrations
             modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Product", b =>
                 {
                     b.Navigation("ProductFiles");
+                });
+
+            modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Warehouse", b =>
+                {
+                    b.Navigation("Stocks");
                 });
 #pragma warning restore 612, 618
         }

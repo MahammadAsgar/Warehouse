@@ -16,13 +16,15 @@ namespace Warehouse.Business
             services.AddScoped<IProductFileService, ProductFileService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IMeatureTypeService, MeatureTypeService>();
-
-
+            services.AddScoped<ISellingService, SellingService>();
+            services.AddScoped<IBuyingService, BuyingService>();
+            services.AddScoped<IDepotService, DepotService>();
+            services.AddScoped<IStockService, StockService>();
 
             services.AddAutoMapper(cfg =>
             {
-               cfg.ShouldMapProperty = p => p.GetMethod.IsPublic || p.GetMethod.IsAssembly;
-               cfg.AddProfile<MapProfile>();
+                cfg.ShouldMapProperty = p => p.GetMethod.IsPublic || p.GetMethod.IsAssembly;
+                cfg.AddProfile<MapProfile>();
             });
         }
     }

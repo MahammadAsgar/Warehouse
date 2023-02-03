@@ -120,14 +120,14 @@ namespace Warehouse.Business.Services.Implementations.Main
                 {
                     result.CategoryId = product.CategoryId.Value;
                 }
-                if (product.MeatureTypeId.HasValue)
-                {
-                    result.MeatureTypeId = product.MeatureTypeId.Value;
-                }
-                if (product.UnitOfMeasure.HasValue)
-                {
-                    result.UnitOfMeasure = product.UnitOfMeasure.Value;
-                }
+                //if (product.MeatureTypeId.HasValue)
+                //{
+                //    result.MeatureTypeId = product.MeatureTypeId.Value;
+                //}
+                //if (product.UnitOfMeasure.HasValue)
+                //{
+                //    result.UnitOfMeasure = product.UnitOfMeasure.Value;
+                //}
                 _unitOfWork.Repository<Product>().Update(result);
                 _unitOfWork.Commit();
                 var response = _mapper.Map<Product>(result);

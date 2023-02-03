@@ -10,8 +10,8 @@ namespace Warehouse.Business.Services.Abstractions.Main
 {
     public interface IMeatureTypeService
     {
-        Task<ServiceResult> AddMeatureType(AddMeatureTypeDto meatureType);
-        Task<ServiceResult> UpdateMeatureType(AddMeatureTypeDto meatureType, int id);
+        Task<ServiceResult> AddMeatureType(AddMeasureTypeDto meatureType);
+        Task<ServiceResult> UpdateMeatureType(AddMeasureTypeDto meatureType, int id);
         Task<ServiceResult> DeleteMeatureType(int id);
         Task<ServiceResult> GetMeatureType(int id);
         Task<ServiceResult> GetAllMeatureTypes();

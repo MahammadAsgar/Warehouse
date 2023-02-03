@@ -20,14 +20,14 @@ namespace Warehouse.WebApi.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(ServiceResult), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<ServiceResult>> AddMeatureType([FromForm] AddMeatureTypeDto meatureType)
+        public async Task<ActionResult<ServiceResult>> AddMeatureType([FromForm] AddMeasureTypeDto meatureType)
         {
             return Ok(await _meatureTypeService.AddMeatureType(meatureType));
         }
 
         [HttpPut]
         [ProducesResponseType(typeof(ServiceResult), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<ServiceResult>> UpdateMeatureType([FromForm] AddMeatureTypeDto meatureType, int id)
+        public async Task<ActionResult<ServiceResult>> UpdateMeatureType([FromForm] AddMeasureTypeDto meatureType, int id)
         {
             return Ok(await _meatureTypeService.UpdateMeatureType(meatureType, id));
         }

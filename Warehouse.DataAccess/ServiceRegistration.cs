@@ -1,10 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Warehouse.DataAccess.Context;
 using Warehouse.DataAccess.Repositories;
 using Warehouse.DataAccess.Repositories.Abstractions.Main;
 using Warehouse.DataAccess.Repositories.Implementations.Main;
@@ -23,6 +17,10 @@ namespace Warehouse.DataAccess
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IMeatureTypeRepository, MeatureTypeRepository>();
+            services.AddScoped<IStockRepository, StockRepository>();
+            services.AddScoped<ISellingRepository, SellingRepository>();
+            services.AddScoped<IBuyingRepository, BuyingRepository>();
+            services.AddScoped<IDepotRepository, DepotRepository>();
         }
     }
 }

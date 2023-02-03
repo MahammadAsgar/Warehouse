@@ -10,27 +10,27 @@ using Warehouse.DataAccess.Repositories.Abstractions.Main;
 
 namespace Warehouse.DataAccess.Repositories.Implementations.Main
 {
-    public class MeatureTypeRepository : GenericRepository<MeatureType>, IMeatureTypeRepository
+    public class MeatureTypeRepository : GenericRepository<MeasureType>, IMeatureTypeRepository
     {
         public MeatureTypeRepository(WarehouseDbContext warehouseDbContext) : base(warehouseDbContext)
         {
         }
 
-        public async Task<MeatureType> GetMeatureType(int id)
+        public async Task<MeasureType> GetMeatureType(int id)
         {
             return await GetAsQueryable()
                 .Include(x => x.Products)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<IEnumerable<MeatureType>> GetAllMeatureTypes()
+        public async Task<IEnumerable<MeasureType>> GetAllMeatureTypes()
         {
             return await GetAsQueryable()
                 .Include(x => x.Products)
                 .ToListAsync();
         } 
         
-        public async Task<IEnumerable<MeatureType>> GetActiveMeatureTypes()
+        public async Task<IEnumerable<MeasureType>> GetActiveMeatureTypes()
         {
             return await GetAsQueryable()
                 .Include(x => x.Products)
