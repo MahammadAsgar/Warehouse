@@ -36,21 +36,19 @@ namespace Warehouse.Business.Services.Implementations.Main
             {
                 stock.UnitOfMeasure -= sellingDto.UnitOfMeasure;
                 _unitOfWork.Repository<Stock>().Update(stock);
-            }
 
-            else
-            {
-                stock = new Stock();
-                stock.IsActive = true;
-                stock.ProductId = sellingDto.ProductId;
-                stock.UnitOfMeasure = sellingDto.UnitOfMeasure;
-                stock.MeasureTypeId = sellingDto.MeasureTypeId;
-                await _unitOfWork.Repository<Stock>().AddAsync(stock);
+                if (stock.UnitOfMeasure==sellingDto.UnitOfMeasure)
+                {
+                    stock.IsActive = false;
+                    
+                    _unitOfWork.Repository<Stock>().Update(stock);
+                }
+                _unitOfWork.Commit();
+                var response = _mapper.Map<GetSellingDto>(request);
+                return new ServiceResult(true, response.Id);
             }
-
-            _unitOfWork.Commit();
-            var response = _mapper.Map<GetSellingDto>(request);
-            return new ServiceResult(true, response.Id);
+            return new ServiceResult(false);
+           
         }
 
         public async Task<ServiceResult> GetSelling(int id)

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.VisualBasic;
 using Warehouse.Business.Dtos.Get.Main;
 using Warehouse.Business.Dtos.Post.Main;
 using Warehouse.Business.Results;
@@ -37,7 +38,6 @@ namespace Warehouse.Business.Services.Implementations.Main
             {
                 stock.UnitOfMeasure += buyingDto.UnitOfMeasure;
                 _unitOfWork.Repository<Stock>().Update(stock);
-                _unitOfWork.Repository<Depot>().Update(depot);
             }
 
             else
@@ -51,11 +51,14 @@ namespace Warehouse.Business.Services.Implementations.Main
                 if (depot == null)
                 {
                     depot=new Depot();
-                    depot.Stocks.Add(stock);
+                    var stocks = new List<Stock>();
+                    stocks.Add(stock);
+                    depot.Stocks = stocks;
                     await _unitOfWork.Repository<Depot>().AddAsync(depot);
                 }
                 else
                 {
+                    depot.Stocks.Add(stock);
                     _unitOfWork.Repository<Depot>().Update(depot);
                 }
             }

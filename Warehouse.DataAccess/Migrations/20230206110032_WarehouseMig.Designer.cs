@@ -12,8 +12,8 @@ using Warehouse.DataAccess.Context;
 namespace Warehouse.DataAccess.Migrations
 {
     [DbContext(typeof(WarehouseDbContext))]
-    [Migration("20230201123033_InitMig")]
-    partial class InitMig
+    [Migration("20230206110032_WarehouseMig")]
+    partial class WarehouseMig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -131,6 +131,50 @@ namespace Warehouse.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Buying", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime?>("EditDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("EditUserId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MeasureTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<double?>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RegDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RegUserId")
+                        .HasColumnType("int");
+
+                    b.Property<double?>("UnitOfMeasure")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MeasureTypeId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Buyings");
+                });
+
             modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -165,6 +209,34 @@ namespace Warehouse.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Depot", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime?>("EditDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("EditUserId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("RegDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RegUserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Warehouses");
                 });
 
             modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.File", b =>
@@ -206,7 +278,7 @@ namespace Warehouse.DataAccess.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("File");
                 });
 
-            modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.MeatureType", b =>
+            modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.MeasureType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -263,16 +335,16 @@ namespace Warehouse.DataAccess.Migrations
                     b.Property<int?>("EditUserId")
                         .HasColumnType("int");
 
-                    b.Property<double>("Height")
+                    b.Property<double?>("Height")
                         .HasColumnType("float");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<double>("Lenght")
+                    b.Property<double?>("Lenght")
                         .HasColumnType("float");
 
-                    b.Property<int>("MeatureTypeId")
+                    b.Property<int?>("MeasureTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -285,25 +357,112 @@ namespace Warehouse.DataAccess.Migrations
                     b.Property<int>("RegUserId")
                         .HasColumnType("int");
 
-                    b.Property<double>("UnitOfMeasure")
+                    b.Property<double?>("Volume")
                         .HasColumnType("float");
 
-                    b.Property<double>("Volume")
+                    b.Property<double?>("Weight")
                         .HasColumnType("float");
 
-                    b.Property<double>("Weight")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Width")
+                    b.Property<double?>("Width")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("MeatureTypeId");
+                    b.HasIndex("MeasureTypeId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Selling", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime?>("EditDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("EditUserId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MeasureTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<double?>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RegDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RegUserId")
+                        .HasColumnType("int");
+
+                    b.Property<double?>("UnitOfMeasure")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MeasureTypeId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Sellings");
+                });
+
+            modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Stock", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("DepotId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("EditDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("EditUserId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MeasureTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RegDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RegUserId")
+                        .HasColumnType("int");
+
+                    b.Property<double?>("UnitOfMeasure")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepotId");
+
+                    b.HasIndex("MeasureTypeId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Stocks");
                 });
 
             modelBuilder.Entity("Warehouse.DataAccess.Entities.Users.ApplicationRole", b =>
@@ -475,6 +634,25 @@ namespace Warehouse.DataAccess.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Buying", b =>
+                {
+                    b.HasOne("Warehouse.DataAccess.Entities.Main.MeasureType", "MeasureType")
+                        .WithMany()
+                        .HasForeignKey("MeasureTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Warehouse.DataAccess.Entities.Main.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MeasureType");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Product", b =>
                 {
                     b.HasOne("Warehouse.DataAccess.Entities.Main.Category", "Category")
@@ -483,15 +661,53 @@ namespace Warehouse.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Warehouse.DataAccess.Entities.Main.MeatureType", "MeatureType")
+                    b.HasOne("Warehouse.DataAccess.Entities.Main.MeasureType", null)
                         .WithMany("Products")
-                        .HasForeignKey("MeatureTypeId")
+                        .HasForeignKey("MeasureTypeId");
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Selling", b =>
+                {
+                    b.HasOne("Warehouse.DataAccess.Entities.Main.MeasureType", "MeasureType")
+                        .WithMany()
+                        .HasForeignKey("MeasureTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
+                    b.HasOne("Warehouse.DataAccess.Entities.Main.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("MeatureType");
+                    b.Navigation("MeasureType");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Stock", b =>
+                {
+                    b.HasOne("Warehouse.DataAccess.Entities.Main.Depot", null)
+                        .WithMany("Stocks")
+                        .HasForeignKey("DepotId");
+
+                    b.HasOne("Warehouse.DataAccess.Entities.Main.MeasureType", "MeasureType")
+                        .WithMany()
+                        .HasForeignKey("MeasureTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Warehouse.DataAccess.Entities.Main.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MeasureType");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.ProductFile", b =>
@@ -510,7 +726,12 @@ namespace Warehouse.DataAccess.Migrations
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.MeatureType", b =>
+            modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Depot", b =>
+                {
+                    b.Navigation("Stocks");
+                });
+
+            modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.MeasureType", b =>
                 {
                     b.Navigation("Products");
                 });

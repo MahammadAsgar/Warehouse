@@ -37,7 +37,7 @@ namespace Warehouse.DataAccess.Repositories.Implementations.Main
                 .Include(x => x.Stocks)
                 .ThenInclude(x => x.Product)
                 .Include(x => x.Stocks)
-                .ThenInclude(x => x.MeasureType)
+                .ThenInclude(x => x.MeasureType)               
                 .FirstOrDefaultAsync();
         }
 
