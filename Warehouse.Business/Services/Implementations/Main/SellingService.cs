@@ -29,6 +29,7 @@ namespace Warehouse.Business.Services.Implementations.Main
         {
             var request = _mapper.Map<Selling>(sellingDto);
             request.IsActive = true;
+            request.SellingDate = DateTime.Now;
             var stock = await _stockRepository.GetStockByProduct(sellingDto.ProductId);
 
             await _unitOfWork.Repository<Selling>().AddAsync(request);

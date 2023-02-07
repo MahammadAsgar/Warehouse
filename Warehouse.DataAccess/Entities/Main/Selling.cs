@@ -11,5 +11,6 @@ namespace Warehouse.DataAccess.Entities.Main
         public double? UnitOfMeasure { get; set; }
         public double? Price { get; set; }
         public bool IsActive { get; set; }
+        public DateTime SellingDate { get; set; }
     }
 }

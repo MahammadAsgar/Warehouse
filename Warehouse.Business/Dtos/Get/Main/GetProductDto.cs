@@ -18,8 +18,6 @@ namespace Warehouse.Business.Dtos.Get.Main
         public double Weight { get; set; }
         public bool IsActive { get; set; }
         public GetCategoryNameDto Category { get; set; }
-        public GetMeasureTypeNameDto MeatureType { get; set; }
-        public double UnitOfMeasure { get; set; }
         public IEnumerable<GetProductFileDto> ProductFiles { get; set; }
     }
 }

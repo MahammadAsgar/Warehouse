@@ -30,6 +30,7 @@ namespace Warehouse.Business.Services.Implementations.Main
         {
             var request = _mapper.Map<Buying>(buyingDto);
             request.IsActive = true;
+            request.BuyingDate = DateTime.Now;
             var stock = await _stockRepository.GetStockByProduct(buyingDto.ProductId);
             var depot = await _depotRepository.GetCurrentDepot();
             await _unitOfWork.Repository<Buying>().AddAsync(request);
