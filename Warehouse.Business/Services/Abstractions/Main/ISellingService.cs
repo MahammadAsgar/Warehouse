@@ -10,8 +10,9 @@ namespace Warehouse.Business.Services.Abstractions.Main
 {
     public interface ISellingService
     { 
-        Task<ServiceResult> AddSelling(AddSellingDto sellingDto);
+        Task<ServiceResult> AddSelling(AddSellingDto sellingDto, int userId);
         Task<ServiceResult> GetSelling(int id);
         Task<ServiceResult> GetSellings();
+        Task<ServiceResult> GetSellingByUser(int userId);
     }
 }

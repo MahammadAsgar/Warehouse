@@ -1,13 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 using Warehouse.DataAccess.Entities.Users;
 using Warehouse.Infrasturucture.Extensions;
 using Warehouse.Infrasturucture.Utilities.Security.Encryption;
@@ -23,7 +17,7 @@ namespace Warehouse.Infrasturucture.Utilities.Security.Jwt
         public JwtHelper(IConfiguration configuration)
         {
             Configuration = configuration;
-            //_tokenOptions = Configuration.GetSection(key: "TokenOptions").Get<TokenOptions>();
+            _tokenOptions = Configuration.GetSection(key: "TokenOptions").Get<TokenOptions>();
             _accessTokenExpiration = DateTime.UtcNow.AddMinutes(_tokenOptions.AccessTokenExpiration);
         }
 

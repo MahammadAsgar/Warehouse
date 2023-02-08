@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Warehouse.DataAccess.Migrations
 {
-    public partial class WarehouseMig : Migration
+    public partial class UserMig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -261,6 +261,8 @@ namespace Warehouse.DataAccess.Migrations
                     UnitOfMeasure = table.Column<double>(type: "float", nullable: true),
                     Price = table.Column<double>(type: "float", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    BuyingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ApplicationUserId = table.Column<int>(type: "int", nullable: false),
                     RegUserId = table.Column<int>(type: "int", nullable: false),
                     RegDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EditUserId = table.Column<int>(type: "int", nullable: true),
@@ -269,6 +271,12 @@ namespace Warehouse.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Buyings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Buyings_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Buyings_MeatureTypes_MeasureTypeId",
                         column: x => x.MeasureTypeId,
@@ -320,6 +328,8 @@ namespace Warehouse.DataAccess.Migrations
                     UnitOfMeasure = table.Column<double>(type: "float", nullable: true),
                     Price = table.Column<double>(type: "float", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    SellingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ApplicationUserId = table.Column<int>(type: "int", nullable: false),
                     RegUserId = table.Column<int>(type: "int", nullable: false),
                     RegDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EditUserId = table.Column<int>(type: "int", nullable: true),
@@ -328,6 +338,12 @@ namespace Warehouse.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sellings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Sellings_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Sellings_MeatureTypes_MeasureTypeId",
                         column: x => x.MeasureTypeId,
@@ -420,6 +436,11 @@ namespace Warehouse.DataAccess.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Buyings_ApplicationUserId",
+                table: "Buyings",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Buyings_MeasureTypeId",
                 table: "Buyings",
                 column: "MeasureTypeId");
@@ -443,6 +464,11 @@ namespace Warehouse.DataAccess.Migrations
                 name: "IX_Products_MeasureTypeId",
                 table: "Products",
                 column: "MeasureTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sellings_ApplicationUserId",
+                table: "Sellings",
+                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sellings_MeasureTypeId",

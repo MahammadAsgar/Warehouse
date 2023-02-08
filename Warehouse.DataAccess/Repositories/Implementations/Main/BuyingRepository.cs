@@ -35,5 +35,14 @@ namespace Warehouse.DataAccess.Repositories.Implementations.Main
                 .Include(x => x.MeasureType)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
+
+        public async Task<IEnumerable<Buying>> GetBuyingsByUser(int userId)
+        {
+            return await GetAsQueryable()
+                .Include(x => x.Product)
+                .Include(x => x.MeasureType)
+                .Where(x => x.ApplicationUserId == userId&&x.IsActive==true)
+                .ToListAsync();
+        }
     }
 }

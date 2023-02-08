@@ -93,7 +93,7 @@ namespace Warehouse.Business.Services.Implementations.User
                 if (userData == null)
                     return new ServiceResult(false, "data not found");
 
-                return new ServiceResult(true, userData);
+                return new ServiceResult(true, userData.Id);
             }
             catch (Exception)
             {

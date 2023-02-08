@@ -2,8 +2,10 @@
 using Warehouse.Business.Mappings;
 using Warehouse.Business.Services.Abstractions.Main;
 using Warehouse.Business.Services.Abstractions.Storage;
+using Warehouse.Business.Services.Abstractions.User;
 using Warehouse.Business.Services.Implementations.Main;
 using Warehouse.Business.Services.Implementations.Storage;
+using Warehouse.Business.Services.Implementations.User;
 
 namespace Warehouse.Business
 {
@@ -20,6 +22,9 @@ namespace Warehouse.Business
             services.AddScoped<IBuyingService, BuyingService>();
             services.AddScoped<IDepotService, DepotService>();
             services.AddScoped<IStockService, StockService>();
+
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IMailService, MailService>();
 
             services.AddAutoMapper(cfg =>
             {

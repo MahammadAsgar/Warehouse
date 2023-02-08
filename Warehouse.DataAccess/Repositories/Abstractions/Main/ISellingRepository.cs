@@ -12,5 +12,6 @@ namespace Warehouse.DataAccess.Repositories.Abstractions.Main
         Task<Selling> GetSelling(int id);
         Task<IEnumerable<Selling>> GetAllSellings();
         Task<IEnumerable<Selling>> GetActiveSellings();
+        Task<IEnumerable<Selling>> GetSellingsByUser(int userId);
     }
 }

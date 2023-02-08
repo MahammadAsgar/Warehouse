@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Text;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 namespace Warehouse.Infrasturucture.Extensions
@@ -7,15 +8,13 @@ namespace Warehouse.Infrasturucture.Extensions
     {
         public static void SetObject(this ISession session, string key, object value)
         {
-           // session.SetString(key, JsonConvert.SerializeObject(value));
+            session.SetString(key, JsonConvert.SerializeObject(value));
         }
 
         public static T GetObject<T>(this ISession session, string key)
         {
-          //  var value = session.GetString(key);
-
-           // return value == null ? default(T) : JsonConvert.DeserializeObject<T>(value);
-           return JsonConvert.DeserializeObject<T>(""); ;
+            var value = session.GetString(key);
+            return value == null ? default(T) : JsonConvert.DeserializeObject<T>(value);
         }
     }
 }

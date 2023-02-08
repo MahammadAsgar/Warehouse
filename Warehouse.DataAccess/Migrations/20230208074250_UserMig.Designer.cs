@@ -12,8 +12,8 @@ using Warehouse.DataAccess.Context;
 namespace Warehouse.DataAccess.Migrations
 {
     [DbContext(typeof(WarehouseDbContext))]
-    [Migration("20230207075505_DateTimeMig")]
-    partial class DateTimeMig
+    [Migration("20230208074250_UserMig")]
+    partial class UserMig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -139,6 +139,9 @@ namespace Warehouse.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("ApplicationUserId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("BuyingDate")
                         .HasColumnType("datetime2");
 
@@ -170,6 +173,8 @@ namespace Warehouse.DataAccess.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("MeasureTypeId");
 
@@ -386,6 +391,9 @@ namespace Warehouse.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("ApplicationUserId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("EditDate")
                         .HasColumnType("datetime2");
 
@@ -417,6 +425,8 @@ namespace Warehouse.DataAccess.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("MeasureTypeId");
 
@@ -642,6 +652,12 @@ namespace Warehouse.DataAccess.Migrations
 
             modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Buying", b =>
                 {
+                    b.HasOne("Warehouse.DataAccess.Entities.Users.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Warehouse.DataAccess.Entities.Main.MeasureType", "MeasureType")
                         .WithMany()
                         .HasForeignKey("MeasureTypeId")
@@ -653,6 +669,8 @@ namespace Warehouse.DataAccess.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("MeasureType");
 
@@ -676,6 +694,12 @@ namespace Warehouse.DataAccess.Migrations
 
             modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Selling", b =>
                 {
+                    b.HasOne("Warehouse.DataAccess.Entities.Users.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Warehouse.DataAccess.Entities.Main.MeasureType", "MeasureType")
                         .WithMany()
                         .HasForeignKey("MeasureTypeId")
@@ -687,6 +711,8 @@ namespace Warehouse.DataAccess.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("MeasureType");
 

@@ -1,4 +1,5 @@
 ﻿using Warehouse.DataAccess.Entities.Base;
+using Warehouse.DataAccess.Entities.Users;
 
 namespace Warehouse.DataAccess.Entities.Main
 {
@@ -12,5 +13,7 @@ namespace Warehouse.DataAccess.Entities.Main
         public double? Price { get; set; }
         public bool IsActive { get; set; }
         public DateTime BuyingDate { get; set; }
+        public int ApplicationUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }

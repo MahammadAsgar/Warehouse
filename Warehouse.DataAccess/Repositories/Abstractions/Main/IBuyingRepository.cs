@@ -7,5 +7,6 @@ namespace Warehouse.DataAccess.Repositories.Abstractions.Main
         Task<Buying> GetBuying(int id);
         Task<IEnumerable<Buying>> GetAllBuyings();
         Task<IEnumerable<Buying>> GetActiveBuyings();
+        Task<IEnumerable<Buying>> GetBuyingsByUser(int userId);
     }
 }

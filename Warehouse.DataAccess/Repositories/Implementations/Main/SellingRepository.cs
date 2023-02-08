@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Warehouse.DataAccess.Context;
 using Warehouse.DataAccess.Entities.Main;
 using Warehouse.DataAccess.Repositories.Abstractions.Main;
@@ -39,6 +34,15 @@ namespace Warehouse.DataAccess.Repositories.Implementations.Main
                 .Include(x => x.Product)
                 .Include(x => x.MeasureType)
                 .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<IEnumerable<Selling>> GetSellingsByUser(int userId)
+        {
+            return await GetAsQueryable()
+               .Include(x => x.Product)
+               .Include(x => x.MeasureType)
+               .Where(x => x.ApplicationUserId == userId&&x.IsActive==true)
+               .ToListAsync();
         }
     }
 }

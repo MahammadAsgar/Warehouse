@@ -26,15 +26,16 @@ namespace Warehouse.Business.Services.Implementations.Main
             _stockRepository = stockRepository;
         }
 
-        public async Task<ServiceResult> AddBuying(AddBuyingDto buyingDto)
+        public async Task<ServiceResult> AddBuying(AddBuyingDto buyingDto, int userId)
         {
             var request = _mapper.Map<Buying>(buyingDto);
             request.IsActive = true;
             request.BuyingDate = DateTime.Now;
+            request.Price = buyingDto.Price * buyingDto.UnitOfMeasure;
+            request.ApplicationUserId=userId;
             var stock = await _stockRepository.GetStockByProduct(buyingDto.ProductId);
             var depot = await _depotRepository.GetCurrentDepot();
             await _unitOfWork.Repository<Buying>().AddAsync(request);
-
             if (stock != null)
             {
                 stock.UnitOfMeasure += buyingDto.UnitOfMeasure;
@@ -79,6 +80,13 @@ namespace Warehouse.Business.Services.Implementations.Main
         public async Task<ServiceResult> GetBuyings()
         {
             var request = await _buyingRepository.GetActiveBuyings();
+            var response = _mapper.Map<List<GetBuyingDto>>(request);
+            return new ServiceResult(true, response);
+        }  
+        
+        public async Task<ServiceResult> GetBuyingsByUser(int userId)
+        {
+            var request = await _buyingRepository.GetBuyingsByUser(userId);
             var response = _mapper.Map<List<GetBuyingDto>>(request);
             return new ServiceResult(true, response);
         }
