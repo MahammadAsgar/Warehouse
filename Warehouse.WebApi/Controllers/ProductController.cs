@@ -86,11 +86,11 @@ namespace Warehouse.WebApi.Controllers
             return Ok(await _productService.GetProductByMeature(meatureId));
         }
 
-        [HttpPost()]
+        [HttpPost]
         [ProducesResponseType(typeof(ServiceResult), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult> SearchProduct(string sortField, [FromForm] ProductSearchModelDto documentSearchModel, int currentPage = 1, int pageSize = 10)
+        public async Task<ActionResult> SearchProduct( [FromForm] ProductSearchModelDto documentSearchModel, int currentPage = 1, int pageSize = 10)
         {
-            var result = await _productService.SearchProduct(currentPage, pageSize, sortField, documentSearchModel);
+            var result = await _productService.SearchProduct(currentPage, pageSize,  documentSearchModel);
             return Ok(result);
         }
     }

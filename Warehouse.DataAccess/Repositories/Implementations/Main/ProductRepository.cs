@@ -64,13 +64,13 @@ namespace Warehouse.DataAccess.Repositories.Implementations.Main
                .ToListAsync();
         }
 
-        public IQueryable<Product> SearcProduct(ProductSeachModel searchModel, string sortField)
+        public IQueryable<Product> SearcProduct(ProductSeachModel searchModel)
         {
             var data = GetAsQueryable()
                          .Include(x => x.Category)
                          .Include(x => x.ProductFiles)
                          .Where(GeneratePredicate(searchModel))
-                         .OrderBy(sortField);
+                         .OrderBy("Id");
             return data;
         }
 
@@ -82,31 +82,21 @@ namespace Warehouse.DataAccess.Repositories.Implementations.Main
                 predicate = predicate.And(x => x.Name == searchModel.Name);
             }
 
-            if (!string.IsNullOrEmpty(searchModel.Description))
-            {
-                predicate = predicate.And(x => x.Description == searchModel.Description);
-            }
-
             if (!string.IsNullOrEmpty(searchModel.CategoryTitle))
             {
                 predicate = predicate.And(x => x.Category.Name == searchModel.CategoryTitle);
             }
 
-            if (!string.IsNullOrEmpty(searchModel.MeatureTypeTitle))
+            if (searchModel.SellingDate.HasValue)
             {
-              //  predicate = predicate.And(x => x.MeatureType.Name == searchModel.MeatureTypeTitle);
+                 predicate = predicate.And(x => x.Sellings.Any(x=>x.SellingDate.Date==searchModel.SellingDate));
             }
 
-            if (searchModel.Volume.HasValue)
+            if (searchModel.BuyingDate.HasValue)
             {
-                predicate = predicate.And(x => x.Volume == searchModel.Volume.Value);
+                 predicate = predicate.And(x => x.Buyings.Any(x=>x.BuyingDate.Date==searchModel.BuyingDate));
             }
 
-            if (searchModel.Weight.HasValue)
-            {
-                predicate = predicate.And(x => x.Weight == searchModel.Weight.Value);
-
-            }
             return predicate;
         }
     }

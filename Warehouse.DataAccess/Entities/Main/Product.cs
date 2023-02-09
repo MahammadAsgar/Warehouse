@@ -20,5 +20,7 @@ namespace Warehouse.DataAccess.Entities.Main
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public ICollection<ProductFile> ProductFiles { get; set; }
+        public ICollection<Selling> Sellings { get; set; }
+        public ICollection<Buying> Buyings { get; set; }
     }
 }

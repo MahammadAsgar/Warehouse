@@ -16,6 +16,6 @@ namespace Warehouse.DataAccess.Repositories.Abstractions.Main
         Task<IEnumerable<Product>> GetActiveProducts();
         Task<IEnumerable<Product>> GetProductsByCategory(int categoryId);
         Task<IEnumerable<Product>> GetProductsByMeatureType(int meatureId);
-        IQueryable<Product> SearcProduct(ProductSeachModel searchModel, string sortField);
+        IQueryable<Product> SearcProduct(ProductSeachModel searchModel);
     }
 }

@@ -663,7 +663,7 @@ namespace Warehouse.DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("Warehouse.DataAccess.Entities.Main.Product", "Product")
-                        .WithMany()
+                        .WithMany("Buyings")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -705,7 +705,7 @@ namespace Warehouse.DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("Warehouse.DataAccess.Entities.Main.Product", "Product")
-                        .WithMany()
+                        .WithMany("Sellings")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -768,7 +768,11 @@ namespace Warehouse.DataAccess.Migrations
 
             modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Product", b =>
                 {
+                    b.Navigation("Buyings");
+
                     b.Navigation("ProductFiles");
+
+                    b.Navigation("Sellings");
                 });
 #pragma warning restore 612, 618
         }

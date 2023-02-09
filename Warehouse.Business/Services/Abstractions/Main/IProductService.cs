@@ -18,6 +18,6 @@ namespace Warehouse.Business.Services.Abstractions.Main
         Task<ServiceResult> GetProductByMeature(int meatureId);
         Task<ServiceResult> GetAllProducts();
         Task<ServiceResult> GetActiveProducts();
-        Task<ServiceResult> SearchProduct(int currentPage, int pageSize, string sortField, ProductSearchModelDto documentSearchModel);
+        Task<ServiceResult> SearchProduct(int currentPage, int pageSize, ProductSearchModelDto documentSearchModel);
     }
 }

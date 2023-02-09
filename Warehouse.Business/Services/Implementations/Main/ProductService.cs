@@ -136,13 +136,13 @@ namespace Warehouse.Business.Services.Implementations.Main
             return new ServiceResult(false);
         }
 
-        public async Task<ServiceResult> SearchProduct(int currentPage, int pageSize, string sortField, ProductSearchModelDto documentSearchModel)
+        public async Task<ServiceResult> SearchProduct(int currentPage, int pageSize,  ProductSearchModelDto documentSearchModel)
         {
             if (pageSize > 100)
                 pageSize = 100;
 
             var product = _mapper.Map<ProductSeachModel>(documentSearchModel);
-            var query = _productRepository.SearcProduct(product, sortField);
+            var query = _productRepository.SearcProduct(product);
 
             var page = query.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 

@@ -12,8 +12,8 @@ using Warehouse.DataAccess.Context;
 namespace Warehouse.DataAccess.Migrations
 {
     [DbContext(typeof(WarehouseDbContext))]
-    [Migration("20230208074250_UserMig")]
-    partial class UserMig
+    [Migration("20230209070609_ProductSellBuyMig")]
+    partial class ProductSellBuyMig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -665,7 +665,7 @@ namespace Warehouse.DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("Warehouse.DataAccess.Entities.Main.Product", "Product")
-                        .WithMany()
+                        .WithMany("Buyings")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -707,7 +707,7 @@ namespace Warehouse.DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("Warehouse.DataAccess.Entities.Main.Product", "Product")
-                        .WithMany()
+                        .WithMany("Sellings")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -770,7 +770,11 @@ namespace Warehouse.DataAccess.Migrations
 
             modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Product", b =>
                 {
+                    b.Navigation("Buyings");
+
                     b.Navigation("ProductFiles");
+
+                    b.Navigation("Sellings");
                 });
 #pragma warning restore 612, 618
         }

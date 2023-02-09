@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Warehouse.DataAccess.Migrations
 {
-    public partial class UserMig : Migration
+    public partial class ProductSellBuyMig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
