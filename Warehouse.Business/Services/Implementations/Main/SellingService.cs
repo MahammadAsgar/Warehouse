@@ -29,7 +29,7 @@ namespace Warehouse.Business.Services.Implementations.Main
             var request = _mapper.Map<Selling>(sellingDto);
             request.IsActive = true;
             request.SellingDate = DateTime.Now;
-            request.Price = sellingDto.Price * sellingDto.UnitOfMeasure;
+         //   request.Price = sellingDto.Price * sellingDto.UnitOfMeasure;
             request.ApplicationUserId = userId;
             var stock = await _stockRepository.GetStockByProduct(sellingDto.ProductId);
 

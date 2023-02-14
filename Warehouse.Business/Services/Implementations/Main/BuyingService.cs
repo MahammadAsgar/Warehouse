@@ -31,7 +31,7 @@ namespace Warehouse.Business.Services.Implementations.Main
             var request = _mapper.Map<Buying>(buyingDto);
             request.IsActive = true;
             request.BuyingDate = DateTime.Now;
-            request.Price = buyingDto.Price * buyingDto.UnitOfMeasure;
+            //request.Price = buyingDto.Price * buyingDto.UnitOfMeasure;
             request.ApplicationUserId=userId;
             var stock = await _stockRepository.GetStockByProduct(buyingDto.ProductId);
             var depot = await _depotRepository.GetCurrentDepot();

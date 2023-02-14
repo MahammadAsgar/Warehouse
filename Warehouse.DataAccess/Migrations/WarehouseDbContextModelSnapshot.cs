@@ -178,7 +178,7 @@ namespace Warehouse.DataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Buyings");
+                    b.ToTable("Buyings", (string)null);
                 });
 
             modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Category", b =>
@@ -214,7 +214,7 @@ namespace Warehouse.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Depot", b =>
@@ -242,7 +242,7 @@ namespace Warehouse.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Warehouses");
+                    b.ToTable("Warehouses", (string)null);
                 });
 
             modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.File", b =>
@@ -279,7 +279,7 @@ namespace Warehouse.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Files");
+                    b.ToTable("Files", (string)null);
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("File");
                 });
@@ -317,7 +317,7 @@ namespace Warehouse.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MeatureTypes");
+                    b.ToTable("MeatureTypes", (string)null);
                 });
 
             modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Product", b =>
@@ -378,7 +378,7 @@ namespace Warehouse.DataAccess.Migrations
 
                     b.HasIndex("MeasureTypeId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Selling", b =>
@@ -430,7 +430,7 @@ namespace Warehouse.DataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Sellings");
+                    b.ToTable("Sellings", (string)null);
                 });
 
             modelBuilder.Entity("Warehouse.DataAccess.Entities.Main.Stock", b =>
@@ -476,7 +476,7 @@ namespace Warehouse.DataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Stocks");
+                    b.ToTable("Stocks", (string)null);
                 });
 
             modelBuilder.Entity("Warehouse.DataAccess.Entities.Users.ApplicationRole", b =>

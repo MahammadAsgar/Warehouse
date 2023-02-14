@@ -11,5 +11,7 @@ namespace Warehouse.DataAccess.Entities.Main
     {
         public ICollection<Stock> Stocks { get; set; }
         public bool IsActive { get; set; }
+        public int CompanyId { get; set; }
+        public Company Company { get; set; }
     }
 }

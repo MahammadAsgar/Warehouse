@@ -29,7 +29,6 @@ namespace Warehouse.WebApi.Controllers
             return Ok(result);
         }
 
-
         [HttpGet]
         [ProducesResponseType(typeof(ServiceResult), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ServiceResult>> GetBuying(int id)
@@ -37,6 +36,7 @@ namespace Warehouse.WebApi.Controllers
             var result = await _buyingService.GetBuying(id);
             return Ok(result);
         }
+
         [HttpGet]
         [ProducesResponseType(typeof(ServiceResult), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ServiceResult>> GetActiveBuyings()
@@ -53,6 +53,5 @@ namespace Warehouse.WebApi.Controllers
             var response = await _buyingService.GetBuyingsByUser((int)user.Data);
             return Ok(response);
         }
-
     }
 }

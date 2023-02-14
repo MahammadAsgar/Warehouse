@@ -22,5 +22,7 @@ namespace Warehouse.DataAccess.Entities.Main
         public ICollection<ProductFile> ProductFiles { get; set; }
         public ICollection<Selling> Sellings { get; set; }
         public ICollection<Buying> Buyings { get; set; }
+        public int CompanyId { get; set; }
+        public Company Company { get; set; }
     }
 }
