@@ -2,12 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 using Warehouse.Business.Dtos.Get.User;
 using Warehouse.Business.Dtos.Post.User;
 using Warehouse.Business.Helpers;
@@ -22,7 +17,7 @@ using Warehouse.Infrasturucture.Utilities.Security.Jwt;
 
 namespace Warehouse.Business.Services.Implementations.User
 {
-    public class UserService: IUserService
+    public class UserService : IUserService
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;

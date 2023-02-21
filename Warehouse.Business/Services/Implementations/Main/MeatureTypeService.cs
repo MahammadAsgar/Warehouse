@@ -5,7 +5,6 @@ using Warehouse.Business.Results;
 using Warehouse.Business.Services.Abstractions.Main;
 using Warehouse.DataAccess.Entities.Main;
 using Warehouse.DataAccess.Repositories.Abstractions.Main;
-using Warehouse.DataAccess.Repositories.Implementations.Main;
 using Warehouse.DataAccess.UnitOfWorks;
 
 namespace Warehouse.Business.Services.Implementations.Main

@@ -14,7 +14,6 @@ namespace Warehouse.DataAccess.Repositories.Implementations.Main
         public async Task<IEnumerable<Selling>> GetActiveSellings()
         {
             return await GetAsQueryable()
-                .Include(x => x.MeasuredProducts)
                 .Where(x => x.IsActive == true)
                 .ToListAsync();
         }
@@ -22,22 +21,19 @@ namespace Warehouse.DataAccess.Repositories.Implementations.Main
         public async Task<IEnumerable<Selling>> GetAllSellings()
         {
             return await GetAsQueryable()
-                .Include(x => x.MeasuredProducts)
                 .ToListAsync();
         }
 
         public async Task<Selling> GetSelling(int id)
         {
             return await GetAsQueryable()
-                .Include(x => x.MeasuredProducts)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<IEnumerable<Selling>> GetSellingsByUser(int userId)
         {
             return await GetAsQueryable()
-               .Include(x => x.MeasuredProducts)
-               .Where(x => x.ApplicationUserId == userId&&x.IsActive==true)
+               .Where(x => x.ApplicationUserId == userId && x.IsActive == true)
                .ToListAsync();
         }
     }

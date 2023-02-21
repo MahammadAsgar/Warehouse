@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.VisualBasic;
 using Warehouse.Business.Dtos.Get.Main;
 using Warehouse.Business.Dtos.Post.Main;
 using Warehouse.Business.Results;
@@ -32,7 +31,7 @@ namespace Warehouse.Business.Services.Implementations.Main
             request.IsActive = true;
             request.BuyingDate = DateTime.Now;
             //request.Price = buyingDto.Price * buyingDto.UnitOfMeasure;
-            request.ApplicationUserId=userId;
+            request.ApplicationUserId = userId;
             var stock = await _stockRepository.GetStockByProduct(buyingDto.ProductId);
             var depot = await _depotRepository.GetCurrentDepot();
             await _unitOfWork.Repository<Buying>().AddAsync(request);
@@ -43,16 +42,16 @@ namespace Warehouse.Business.Services.Implementations.Main
             }
 
             else
-            {                
+            {
                 stock = new Stock();
                 stock.IsActive = true;
-                stock.ProductId = buyingDto.ProductId;
+                //stock.ProductId = buyingDto.ProductId;
                 stock.UnitOfMeasure = buyingDto.UnitOfMeasure;
-                stock.MeasureTypeId = buyingDto.MeasureTypeId;
+               // stock.MeasureTypeId = buyingDto.MeasureTypeId;
                 await _unitOfWork.Repository<Stock>().AddAsync(stock);
                 if (depot == null)
                 {
-                    depot=new Depot();
+                    depot = new Depot();
                     var stocks = new List<Stock>();
                     stocks.Add(stock);
                     depot.Stocks = stocks;
@@ -82,8 +81,8 @@ namespace Warehouse.Business.Services.Implementations.Main
             var request = await _buyingRepository.GetActiveBuyings();
             var response = _mapper.Map<List<GetBuyingDto>>(request);
             return new ServiceResult(true, response);
-        }  
-        
+        }
+
         public async Task<ServiceResult> GetBuyingsByUser(int userId)
         {
             var request = await _buyingRepository.GetBuyingsByUser(userId);

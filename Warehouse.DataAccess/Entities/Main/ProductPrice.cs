@@ -2,7 +2,7 @@
 
 namespace Warehouse.DataAccess.Entities.Main
 {
-    public class ProductPrice:EntityBase
+    public class ProductPrice : EntityBase
     {
         public int ProductId { get; set; }
         public Product Product { get; set; }

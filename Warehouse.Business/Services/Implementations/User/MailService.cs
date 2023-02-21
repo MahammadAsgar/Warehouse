@@ -1,16 +1,12 @@
 ﻿using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
 using System.Net;
+using System.Net.Mail;
 using System.Text;
-using System.Threading.Tasks;
 using Warehouse.Business.Services.Abstractions.User;
 
 namespace Warehouse.Business.Services.Implementations.User
 {
-    public class MailService:IMailService
+    public class MailService : IMailService
     {
         private readonly IConfiguration _configuration;
 

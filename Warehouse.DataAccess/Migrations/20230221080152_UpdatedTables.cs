@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Warehouse.DataAccess.Migrations
 {
-    public partial class ProductSellBuyMig : Migration
+    public partial class UpdatedTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,34 +22,6 @@ namespace Warehouse.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,6 +44,24 @@ namespace Warehouse.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Companies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RegUserId = table.Column<int>(type: "int", nullable: false),
+                    RegDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EditUserId = table.Column<int>(type: "int", nullable: true),
+                    EditDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Companies", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MeatureTypes",
                 columns: table => new
                 {
@@ -91,12 +81,13 @@ namespace Warehouse.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Warehouses",
+                name: "Partners",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RegUserId = table.Column<int>(type: "int", nullable: false),
                     RegDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EditUserId = table.Column<int>(type: "int", nullable: true),
@@ -104,7 +95,7 @@ namespace Warehouse.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Warehouses", x => x.Id);
+                    table.PrimaryKey("PK_Partners", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -124,6 +115,102 @@ namespace Warehouse.DataAccess.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CompanyId = table.Column<int>(type: "int", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_Companies_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Companies",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Height = table.Column<double>(type: "float", nullable: true),
+                    Width = table.Column<double>(type: "float", nullable: true),
+                    Lenght = table.Column<double>(type: "float", nullable: true),
+                    Volume = table.Column<double>(type: "float", nullable: true),
+                    Weight = table.Column<double>(type: "float", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    CompanyId = table.Column<int>(type: "int", nullable: false),
+                    RegUserId = table.Column<int>(type: "int", nullable: false),
+                    RegDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EditUserId = table.Column<int>(type: "int", nullable: true),
+                    EditDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Products_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Products_Companies_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Companies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Warehouses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CompanyId = table.Column<int>(type: "int", nullable: false),
+                    RegUserId = table.Column<int>(type: "int", nullable: false),
+                    RegDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EditUserId = table.Column<int>(type: "int", nullable: true),
+                    EditDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Warehouses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Warehouses_Companies_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Companies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -214,84 +301,6 @@ namespace Warehouse.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Height = table.Column<double>(type: "float", nullable: true),
-                    Width = table.Column<double>(type: "float", nullable: true),
-                    Lenght = table.Column<double>(type: "float", nullable: true),
-                    Volume = table.Column<double>(type: "float", nullable: true),
-                    Weight = table.Column<double>(type: "float", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
-                    MeasureTypeId = table.Column<int>(type: "int", nullable: true),
-                    RegUserId = table.Column<int>(type: "int", nullable: false),
-                    RegDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EditUserId = table.Column<int>(type: "int", nullable: true),
-                    EditDate = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Products_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Products_MeatureTypes_MeasureTypeId",
-                        column: x => x.MeasureTypeId,
-                        principalTable: "MeatureTypes",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Buyings",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    MeasureTypeId = table.Column<int>(type: "int", nullable: false),
-                    UnitOfMeasure = table.Column<double>(type: "float", nullable: true),
-                    Price = table.Column<double>(type: "float", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    BuyingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ApplicationUserId = table.Column<int>(type: "int", nullable: false),
-                    RegUserId = table.Column<int>(type: "int", nullable: false),
-                    RegDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EditUserId = table.Column<int>(type: "int", nullable: true),
-                    EditDate = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Buyings", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Buyings_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Buyings_MeatureTypes_MeasureTypeId",
-                        column: x => x.MeasureTypeId,
-                        principalTable: "MeatureTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Buyings_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Files",
                 columns: table => new
                 {
@@ -318,18 +327,116 @@ namespace Warehouse.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Sellings",
+                name: "MeasuredProducts",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     MeasureTypeId = table.Column<int>(type: "int", nullable: false),
-                    UnitOfMeasure = table.Column<double>(type: "float", nullable: true),
+                    RegUserId = table.Column<int>(type: "int", nullable: false),
+                    RegDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EditUserId = table.Column<int>(type: "int", nullable: true),
+                    EditDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MeasuredProducts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MeasuredProducts_MeatureTypes_MeasureTypeId",
+                        column: x => x.MeasureTypeId,
+                        principalTable: "MeatureTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MeasuredProducts_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductPrices",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: true),
+                    CompanyId = table.Column<int>(type: "int", nullable: true),
+                    RegUserId = table.Column<int>(type: "int", nullable: false),
+                    RegDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EditUserId = table.Column<int>(type: "int", nullable: true),
+                    EditDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductPrices", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductPrices_Companies_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Companies",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ProductPrices_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Buyings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MeasuredProductId = table.Column<int>(type: "int", nullable: false),
+                    UnitOfMeasure = table.Column<double>(type: "float", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    BuyingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ApplicationUserId = table.Column<int>(type: "int", nullable: false),
+                    CompanyId = table.Column<int>(type: "int", nullable: true),
+                    RegUserId = table.Column<int>(type: "int", nullable: false),
+                    RegDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EditUserId = table.Column<int>(type: "int", nullable: true),
+                    EditDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Buyings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Buyings_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Buyings_Companies_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Companies",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Buyings_MeasuredProducts_MeasuredProductId",
+                        column: x => x.MeasuredProductId,
+                        principalTable: "MeasuredProducts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Sellings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MeasuredProductId = table.Column<int>(type: "int", nullable: false),
+                    UnitOfMeasure = table.Column<double>(type: "float", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     SellingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ApplicationUserId = table.Column<int>(type: "int", nullable: false),
+                    CompanyId = table.Column<int>(type: "int", nullable: true),
                     RegUserId = table.Column<int>(type: "int", nullable: false),
                     RegDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EditUserId = table.Column<int>(type: "int", nullable: true),
@@ -345,15 +452,14 @@ namespace Warehouse.DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Sellings_MeatureTypes_MeasureTypeId",
-                        column: x => x.MeasureTypeId,
-                        principalTable: "MeatureTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_Sellings_Companies_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Companies",
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Sellings_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
+                        name: "FK_Sellings_MeasuredProducts_MeasuredProductId",
+                        column: x => x.MeasuredProductId,
+                        principalTable: "MeasuredProducts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -364,8 +470,7 @@ namespace Warehouse.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    MeasureTypeId = table.Column<int>(type: "int", nullable: false),
+                    MeasuredProductId = table.Column<int>(type: "int", nullable: false),
                     UnitOfMeasure = table.Column<double>(type: "float", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     DepotId = table.Column<int>(type: "int", nullable: true),
@@ -378,15 +483,9 @@ namespace Warehouse.DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_Stocks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Stocks_MeatureTypes_MeasureTypeId",
-                        column: x => x.MeasureTypeId,
-                        principalTable: "MeatureTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Stocks_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
+                        name: "FK_Stocks_MeasuredProducts_MeasuredProductId",
+                        column: x => x.MeasuredProductId,
+                        principalTable: "MeasuredProducts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -429,6 +528,11 @@ namespace Warehouse.DataAccess.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_CompanyId",
+                table: "AspNetUsers",
+                column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
@@ -441,18 +545,38 @@ namespace Warehouse.DataAccess.Migrations
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Buyings_MeasureTypeId",
+                name: "IX_Buyings_CompanyId",
                 table: "Buyings",
-                column: "MeasureTypeId");
+                column: "CompanyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Buyings_ProductId",
+                name: "IX_Buyings_MeasuredProductId",
                 table: "Buyings",
-                column: "ProductId");
+                column: "MeasuredProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Files_ProductId",
                 table: "Files",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MeasuredProducts_MeasureTypeId",
+                table: "MeasuredProducts",
+                column: "MeasureTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MeasuredProducts_ProductId",
+                table: "MeasuredProducts",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductPrices_CompanyId",
+                table: "ProductPrices",
+                column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductPrices_ProductId",
+                table: "ProductPrices",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
@@ -461,9 +585,9 @@ namespace Warehouse.DataAccess.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_MeasureTypeId",
+                name: "IX_Products_CompanyId",
                 table: "Products",
-                column: "MeasureTypeId");
+                column: "CompanyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sellings_ApplicationUserId",
@@ -471,14 +595,14 @@ namespace Warehouse.DataAccess.Migrations
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sellings_MeasureTypeId",
+                name: "IX_Sellings_CompanyId",
                 table: "Sellings",
-                column: "MeasureTypeId");
+                column: "CompanyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sellings_ProductId",
+                name: "IX_Sellings_MeasuredProductId",
                 table: "Sellings",
-                column: "ProductId");
+                column: "MeasuredProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stocks_DepotId",
@@ -486,14 +610,14 @@ namespace Warehouse.DataAccess.Migrations
                 column: "DepotId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Stocks_MeasureTypeId",
+                name: "IX_Stocks_MeasuredProductId",
                 table: "Stocks",
-                column: "MeasureTypeId");
+                column: "MeasuredProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Stocks_ProductId",
-                table: "Stocks",
-                column: "ProductId");
+                name: "IX_Warehouses_CompanyId",
+                table: "Warehouses",
+                column: "CompanyId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -520,6 +644,12 @@ namespace Warehouse.DataAccess.Migrations
                 name: "Files");
 
             migrationBuilder.DropTable(
+                name: "Partners");
+
+            migrationBuilder.DropTable(
+                name: "ProductPrices");
+
+            migrationBuilder.DropTable(
                 name: "Sellings");
 
             migrationBuilder.DropTable(
@@ -532,16 +662,22 @@ namespace Warehouse.DataAccess.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "MeasuredProducts");
 
             migrationBuilder.DropTable(
                 name: "Warehouses");
 
             migrationBuilder.DropTable(
+                name: "MeatureTypes");
+
+            migrationBuilder.DropTable(
+                name: "Products");
+
+            migrationBuilder.DropTable(
                 name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "MeatureTypes");
+                name: "Companies");
         }
     }
 }

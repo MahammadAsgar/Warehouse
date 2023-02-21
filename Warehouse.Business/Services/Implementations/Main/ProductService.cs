@@ -15,17 +15,22 @@ namespace Warehouse.Business.Services.Implementations.Main
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IProductRepository _productRepository;
-        public ProductService(IMapper mapper, IUnitOfWork unitOfWork, IProductRepository productRepository)
+        private readonly ICompanyRepository _companyRepository;
+        public ProductService(IMapper mapper, IUnitOfWork unitOfWork, IProductRepository productRepository, ICompanyRepository companyRepository)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
             _productRepository = productRepository;
+            _companyRepository = companyRepository;
         }
 
-        public async Task<ServiceResult> AddProduct(AddProductDto product)
+        public async Task<ServiceResult> AddProduct(AddProductDto product, int userId)
         {
             var request = _mapper.Map<Product>(product);
+            var company= await _companyRepository.GetCompanyByUser(userId);
             request.IsActive = true;
+            request.CompanyId=company.Id;
+            
             await _unitOfWork.Repository<Product>().AddAsync(request);
             _unitOfWork.Commit();
             var response = _mapper.Map<GetProductDto>(request);
@@ -136,7 +141,7 @@ namespace Warehouse.Business.Services.Implementations.Main
             return new ServiceResult(false);
         }
 
-        public async Task<ServiceResult> SearchProduct(int currentPage, int pageSize,  ProductSearchModelDto documentSearchModel)
+        public async Task<ServiceResult> SearchProduct(int currentPage, int pageSize, ProductSearchModelDto documentSearchModel)
         {
             if (pageSize > 100)
                 pageSize = 100;

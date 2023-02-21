@@ -2,7 +2,7 @@
 
 namespace Warehouse.DataAccess.Entities.Users
 {
-    public class ApplicationRole: IdentityRole<int>
+    public class ApplicationRole : IdentityRole<int>
     {
     }
 }

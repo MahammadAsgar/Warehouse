@@ -55,7 +55,7 @@ builder.Services.AddSession(conf =>
 #endregion
 
 
-builder.Services.AddDbContext<WarehouseDbContext>(options =>options.UseSqlServer(builder.Configuration.GetConnectionString("WarehouseDbConnection")));
+builder.Services.AddDbContext<WarehouseDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("WarehouseDbConnection")));
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(config =>
 {
     config.Stores.MaxLengthForKeys = 128;

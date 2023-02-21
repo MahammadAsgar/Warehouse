@@ -2,7 +2,7 @@
 
 namespace Warehouse.DataAccess.Repositories.Abstractions.Main
 {
-    public interface IBuyingRepository:IGenericRepository<Buying>
+    public interface IBuyingRepository : IGenericRepository<Buying>
     {
         Task<Buying> GetBuying(int id);
         Task<IEnumerable<Buying>> GetAllBuyings();

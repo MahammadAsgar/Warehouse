@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using Warehouse.Business.Dtos.Post.Main;
 using Warehouse.Business.Results;
 using Warehouse.Business.Services.Abstractions.Main;
-using Warehouse.Business.Services.Implementations;
 
 namespace Warehouse.WebApi.Controllers
 {
@@ -52,7 +50,7 @@ namespace Warehouse.WebApi.Controllers
         {
             return Ok(await _meatureTypeService.GetAllMeatureTypes());
         }
-        
+
         [HttpGet]
         [ProducesResponseType(typeof(ServiceResult), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ServiceResult>> GetActiveMeatureTypes()

@@ -1,9 +1,4 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Warehouse.Business.Dtos.Get.Main;
 using Warehouse.Business.Dtos.Post.Main;
 using Warehouse.Business.Results;
@@ -56,7 +51,7 @@ namespace Warehouse.Business.Services.Implementations.Main
             return new ServiceResult(true, response);
         }
 
-         public async Task<ServiceResult> GetActiveCategories()
+        public async Task<ServiceResult> GetActiveCategories()
         {
             var request = await _categoryRepository.GetActiveCategories();
             var response = _mapper.Map<IEnumerable<GetCategoryDto>>(request);

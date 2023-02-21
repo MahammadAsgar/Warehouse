@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using Warehouse.Business.Dtos.Post.Main;
 using Warehouse.Business.Results;
@@ -25,7 +24,7 @@ namespace Warehouse.WebApi.Controllers
         public async Task<ActionResult<ServiceResult>> AddBuying([FromForm] AddBuyingDto buyging)
         {
             var user = _userService.GetLoggedUser();
-            var result = await _buyingService.AddBuying(buyging,(int)user.Data);
+            var result = await _buyingService.AddBuying(buyging, (int)user.Data);
             return Ok(result);
         }
 

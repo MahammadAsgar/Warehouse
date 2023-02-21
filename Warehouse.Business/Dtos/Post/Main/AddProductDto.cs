@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Warehouse.DataAccess.Entities.Main;
 
 namespace Warehouse.Business.Dtos.Post.Main
 {
@@ -13,6 +12,7 @@ namespace Warehouse.Business.Dtos.Post.Main
         public double? Volume { get; set; }
         public double? Weight { get; set; }
         public int? CategoryId { get; set; }
+        public int? MeasureTypeId { get; set; }
         public IFormFileCollection Files { get; set; }
     }
 }

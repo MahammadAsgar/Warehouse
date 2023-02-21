@@ -7,7 +7,7 @@ namespace Warehouse.DataAccess.Entities.Users
     {
         public string Name { get; set; }
         public string Surname { get; set; }
-        public int? CompanyId { get; set; }
-        public Company? Company { get; set; }
+        //public int? CompanyId { get; set; }
+       // public Company? Company { get; set; }
     }
 }

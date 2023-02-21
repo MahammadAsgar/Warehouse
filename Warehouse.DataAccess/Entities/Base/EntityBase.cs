@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Warehouse.DataAccess.Entities.Base
+﻿namespace Warehouse.DataAccess.Entities.Base
 {
     public class EntityBase
     {

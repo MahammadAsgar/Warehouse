@@ -3,8 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using Warehouse.DataAccess.Context;
 using Warehouse.DataAccess.Entities.Main;
-using Warehouse.DataAccess.Models;
 using Warehouse.DataAccess.Extensions;
+using Warehouse.DataAccess.Models;
 using Warehouse.DataAccess.Repositories.Abstractions.Main;
 
 namespace Warehouse.DataAccess.Repositories.Implementations.Main
@@ -87,15 +87,7 @@ namespace Warehouse.DataAccess.Repositories.Implementations.Main
                 predicate = predicate.And(x => x.Category.Name == searchModel.CategoryTitle);
             }
 
-            if (searchModel.SellingDate.HasValue)
-            {
-                 predicate = predicate.And(x => x.Sellings.Any(x=>x.SellingDate.Date==searchModel.SellingDate));
-            }
-
-            if (searchModel.BuyingDate.HasValue)
-            {
-                 predicate = predicate.And(x => x.Buyings.Any(x=>x.BuyingDate.Date==searchModel.BuyingDate));
-            }
+    
 
             return predicate;
         }

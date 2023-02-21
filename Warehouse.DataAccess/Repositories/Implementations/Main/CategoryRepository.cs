@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Warehouse.DataAccess.Context;
 using Warehouse.DataAccess.Entities.Main;
 using Warehouse.DataAccess.Repositories.Abstractions.Main;
@@ -19,14 +14,14 @@ namespace Warehouse.DataAccess.Repositories.Implementations.Main
         public async Task<IEnumerable<Category>> GetAllCategories()
         {
             return await GetAsQueryable()
-                 .Include(x => x.Products)                 
+                 .Include(x => x.Products)
                  .ToListAsync();
         }
-         public async Task<IEnumerable<Category>> GetActiveCategories()
+        public async Task<IEnumerable<Category>> GetActiveCategories()
         {
             return await GetAsQueryable()
-                 .Include(x => x.Products)  
-                 .Where(x => x.IsActive==true)
+                 .Include(x => x.Products)
+                 .Where(x => x.IsActive == true)
                  .ToListAsync();
         }
 

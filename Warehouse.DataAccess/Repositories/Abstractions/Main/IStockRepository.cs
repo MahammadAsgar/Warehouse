@@ -2,7 +2,7 @@
 
 namespace Warehouse.DataAccess.Repositories.Abstractions.Main
 {
-    public interface IStockRepository:IGenericRepository<Stock>
+    public interface IStockRepository : IGenericRepository<Stock>
     {
         Task<Stock> GetStock(int id);
         Task<IEnumerable<Stock>> GetAllStocks();

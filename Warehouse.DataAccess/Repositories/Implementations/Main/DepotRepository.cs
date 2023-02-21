@@ -15,10 +15,6 @@ namespace Warehouse.DataAccess.Repositories.Implementations.Main
         {
             return await GetAsQueryable()
                 .Include(x => x.Stocks)
-                .ThenInclude(x => x.Product)
-                .Include(x => x.Stocks)
-                .ThenInclude(x => x.MeasureType)
-                .Where(x => x.IsActive == true)
                 .ToListAsync();
         }
 
@@ -26,18 +22,12 @@ namespace Warehouse.DataAccess.Repositories.Implementations.Main
         {
             return await GetAsQueryable()
                 .Include(x => x.Stocks)
-                .ThenInclude(x => x.Product)
-                .Include(x => x.Stocks)
-                .ThenInclude(x => x.MeasureType)
                 .ToListAsync();
         }
         public async Task<Depot> GetCurrentDepot()
         {
             return await GetAsQueryable()
                 .Include(x => x.Stocks)
-                .ThenInclude(x => x.Product)
-                .Include(x => x.Stocks)
-                .ThenInclude(x => x.MeasureType)               
                 .FirstOrDefaultAsync();
         }
 
@@ -45,9 +35,6 @@ namespace Warehouse.DataAccess.Repositories.Implementations.Main
         {
             return await GetAsQueryable()
                   .Include(x => x.Stocks)
-                  .ThenInclude(x => x.Product)
-                  .Include(x => x.Stocks)
-                  .ThenInclude(x => x.MeasureType)
                   .FirstOrDefaultAsync(x => x.Id == id);
         }
 

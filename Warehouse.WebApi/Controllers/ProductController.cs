@@ -3,6 +3,8 @@ using System.Net;
 using Warehouse.Business.Dtos.Post.Main;
 using Warehouse.Business.Results;
 using Warehouse.Business.Services.Abstractions.Main;
+using Warehouse.Business.Services.Abstractions.User;
+using Warehouse.Infrasturucture.Extensions;
 
 namespace Warehouse.WebApi.Controllers
 {
@@ -12,17 +14,23 @@ namespace Warehouse.WebApi.Controllers
     {
         private readonly IProductService _productService;
         private readonly IProductFileService _productFileService;
-        public ProductController(IProductService productService, IProductFileService productFileService)
+        private readonly IUserService _userService;
+        public ProductController(IProductService productService, IProductFileService productFileService, IUserService userService)
         {
             _productService = productService;
             _productFileService = productFileService;
+            _userService = userService;
         }
 
+
+
         [HttpPost]
+        [CustomAuthorize(claims:"Admin")]
         [ProducesResponseType(typeof(ServiceResult), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ServiceResult>> AddProduct([FromForm] AddProductDto product)
         {
-            var result = await _productService.AddProduct(product);
+            var user = _userService.GetLoggedUser().Data;
+            var result = await _productService.AddProduct(product, (int)user);
             if (result.Success)
             {
                 product.Files = Request.Form.Files;
@@ -65,6 +73,8 @@ namespace Warehouse.WebApi.Controllers
             return Ok(await _productService.GetAllProducts());
         }
 
+
+        [CustomAuthorize(claims: "admin")]
         [HttpGet]
         [ProducesResponseType(typeof(ServiceResult), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ServiceResult>> GetActiveProducts()
@@ -88,9 +98,9 @@ namespace Warehouse.WebApi.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(ServiceResult), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult> SearchProduct( [FromForm] ProductSearchModelDto documentSearchModel, int currentPage = 1, int pageSize = 10)
+        public async Task<ActionResult> SearchProduct([FromForm] ProductSearchModelDto documentSearchModel, int currentPage = 1, int pageSize = 10)
         {
-            var result = await _productService.SearchProduct(currentPage, pageSize,  documentSearchModel);
+            var result = await _productService.SearchProduct(currentPage, pageSize, documentSearchModel);
             return Ok(result);
         }
     }

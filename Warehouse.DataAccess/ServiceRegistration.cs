@@ -10,7 +10,7 @@ namespace Warehouse.DataAccess
     {
         public static void AddDataAccessServices(this IServiceCollection services)
         {
-           // Builder.Services.AddDbContext<WarehouseDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WarehouseDbConnection")));
+            // Builder.Services.AddDbContext<WarehouseDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WarehouseDbConnection")));
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -21,6 +21,8 @@ namespace Warehouse.DataAccess
             services.AddScoped<ISellingRepository, SellingRepository>();
             services.AddScoped<IBuyingRepository, BuyingRepository>();
             services.AddScoped<IDepotRepository, DepotRepository>();
+            services.AddScoped<ICompanyRepository, CompanyRepository>();
+            services.AddScoped<IPartnerRepository, PartnerRepository>();
         }
     }
 }

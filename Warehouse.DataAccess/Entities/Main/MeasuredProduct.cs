@@ -2,7 +2,7 @@
 
 namespace Warehouse.DataAccess.Entities.Main
 {
-    public class MeasuredProduct:EntityBase
+    public class MeasuredProduct : EntityBase
     {
         public int ProductId { get; set; }
         public Product Product { get; set; }
